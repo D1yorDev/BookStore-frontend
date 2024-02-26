@@ -1,6 +1,4 @@
 import {createRouter,createWebHistory} from "vue-router"
-import HomePage from "@/pages/HomePage.vue";
-import BookInfoPage from "@/pages/BookInfoPage.vue";
 
 
 
@@ -12,6 +10,10 @@ const routes = [
     {
         path: '/book-info',
         component: () => import('@/pages/BookInfoPage.vue')
+    },
+    {
+        path: '/login',
+        component: () => import('@/pages/LoginPage.vue')
     }
 ]
 
