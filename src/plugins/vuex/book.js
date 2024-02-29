@@ -5,7 +5,7 @@ export default {
         fetchBooks(context, categoryId = null) {
             let categoryUrl = ''
 
-            if (categoryId !== null){
+            if (categoryId !== null) {
                 categoryUrl = '?category=' + categoryId
             }
             return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ export default {
                     .then((response) => {
                         console.log('success, Books is successfully fetched')
 
-                        let books ={
+                        let books = {
                             models: response.data['hydra:member'],
                             totalItems: response.data['hydra:totalItems'],
                         }
@@ -26,21 +26,45 @@ export default {
                         reject()
                     })
             })
+        },
+        fetchBook(context, bookId) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get('http://localhost:8888/api/books/' + bookId)
+                    .then((response) => {
+                        context.commit('updateBook', response.data)
+                        resolve()
+                    })
+                    .catch(() => {
+                        console.log('error taking books')
+                        reject()
+                    })
+            })
         }
     }, mutations: {
-       updateBooks(state, books) {
-           state.books = books
-       }
+        updateBooks(state, books) {
+            state.books = books
+        },
+        updateBook(state, book) {
+            state.book = book
+        }
     },
     state: {
         books: {
             models: [],
             totalItems: 0
+        },
+        book: {
+            name: '',
+            text: ''
         }
     },
     getters: {
-       getBooks(state) {
-           return state.books.models
-       }
+        getBooks(state) {
+            return state.books.models
+        },
+        getBook(state) {
+            return state.book
+        }
     }
 }

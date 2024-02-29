@@ -46,7 +46,7 @@ export default {
     <!-- main qator tugadi -->
 
     <!-- footer qator boshlandi -->
-    <FooterRow/>
+    <FooterRow foo="werd"/>
     <!-- footer qator tugadi -->
 
   </div>
