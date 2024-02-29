@@ -1,53 +1,44 @@
-<script setup>
-
+<script>
+import {mapActions,mapGetters} from "vuex";
+export default {
+  name: "BooksRow",
+  computed: {
+    ...mapGetters(['getBooks'])
+  },
+  methods: {
+    ...mapActions(['fetchBooks'])
+  },
+  watch: {
+    '$route.params.id'() {
+      console.log('id changed bro')
+      this.fetchBooks(this.$route.params.id)
+    }
+  },
+  mounted() {
+    console.log("booksRow componentimiz yuklandi")
+    this.fetchBooks(this.$route.params.id)
+  }
+}
 </script>
 
 <template>
   <div class="row">
 
-
     <!-- kitob boshlandi -->
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+    <div
+        v-for="book of getBooks"
+        v-bind:key="book.id"
+        class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
       <div class="card">
-        <img alt="sherlock-holmes-picture" class="card-img-top" src="../../src/img/sherlock.jpg">
+        <img src="../img/sherlock.jpg" class="card-img-top" alt="sherlock-holmes-picture">
         <div class="card-body">
-          <h5 class="card-title">Sherlock Holmes</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-          <a class="btn btn-primary" href="">O'qish</a>
+          <h5 class="card-title">{{book.name}}</h5>
+          <p class="card-text">{{book.description}}</p>
+          <router-link :to="'/book-info/' + book.id" class="btn btn-primary">Read</router-link>
         </div>
       </div>
     </div>
     <!-- kitob tugadi -->
-
-    <!-- kitob boshlandi -->
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
-      <div class="card">
-        <img alt="sherlock-holmes-picture" class="card-img-top" src="../../src/img/sherlock.jpg">
-        <div class="card-body">
-          <h5 class="card-title">Sherlock Holmes</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-          <a class="btn btn-primary" href="">O'qish</a>
-        </div>
-      </div>
-    </div>
-    <!-- kitob tugadi -->
-
-    <!-- kitob boshlandi -->
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
-      <div class="card">
-        <img alt="sherlock-holmes-picture" class="card-img-top" src="../../src/img/sherlock.jpg">
-        <div class="card-body">
-          <h5 class="card-title">Sherlock Holmes</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-          <router-link to="/book-info" class="btn btn-primary">O'qish</router-link>
-        </div>
-      </div>
-    </div>
-    <!-- kitob tugadi -->
-
   </div>
 
 </template>

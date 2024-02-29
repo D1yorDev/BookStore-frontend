@@ -1,19 +1,34 @@
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
-  name: 'SideBar'
+  name: 'SideBar',
+  computed: {
+    ...mapGetters(['getCategories'])
+  },
+  methods: {
+    ...mapActions(['fetchCategories'])
+  }
 }
 </script>
 
 <template>
   <div class="col-12 col-md-2">
-    <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action">Komediya</a>
-      <a href="#" class="list-group-item list-group-item-action">Tarixiy</a>
-      <a href="#" class="list-group-item list-group-item-action">Romantik</a>
-      <a href="#" class="list-group-item list-group-item-action active" aria-current="true">Detektiv</a>
-      <a class="list-group-item list-group-item-action disabled">Badiiy</a>
+    <div v-if="$route.path !== '/login'" class="list-group">
+      <router-link
+          v-for="category of getCategories"
+          v-bind:key="category.id"
+          :to="'/categories/' + category.id"
+          class="list-group-item list-group-item-action"
+          :class="parseInt($route.params.id) === category.id ? 'active' : ''"
+      >
+        {{ category.name }}
+      </router-link>
+
     </div>
   </div>
+
+
 </template>
 
 <style>
