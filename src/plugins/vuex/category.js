@@ -4,7 +4,7 @@ export default {
         fetchCategories(context) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get('http://localhost:8888/api/categoriesk')
+                    .get('http://localhost:8888/api/categories')
                     .then((response) => {
                         console.log('kategoriyalr muvaffaqiyatli olindi')
 
