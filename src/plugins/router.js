@@ -17,6 +17,18 @@ const routes = [
     {
         path: '/login',
         component: () => import('@/pages/LoginPage.vue')
+    },
+    {
+        path: '/register',
+        component: () => import('@/pages/RegisterPage.vue')
+    },
+    {
+        path: '/create-category',
+        component: () => import('@/pages/CreateCategory.vue')
+    },
+    {
+        path: '/create-book',
+        component: () => import('@/pages/CreateBook.vue')
     }
 ]
 

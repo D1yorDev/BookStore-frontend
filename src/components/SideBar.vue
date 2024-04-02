@@ -14,7 +14,7 @@ export default {
 
 <template>
   <div class="col-12 col-md-2">
-    <div v-if="$route.path !== '/login'" class="list-group">
+    <div v-if="$route.path !== '/login' && '/register' " class="list-group">
       <router-link
           v-for="category of getCategories"
           v-bind:key="category.id"
