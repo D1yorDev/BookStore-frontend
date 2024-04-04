@@ -27,6 +27,23 @@ export default {
                     })
             })
         },
+
+        fetchBook(context, bookId = null) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get('http://localhost:8888/api/books/' + bookId)
+                    .then((response) => {
+                        console.log('success, Book is successfully fetched')
+                        context.commit('updateBook', response.data)
+                        resolve()
+                    })
+                    .catch(() => {
+                        console.log('Failed, there is an error in getting books')
+                        reject()
+                    })
+            })
+        },
+
         pushKitob(context,data){
             return new Promise((resolve, reject) => {
                 axios
@@ -47,6 +64,9 @@ export default {
        updateBooks(state, books) {
            state.books = books
        },
+        updateBook(state, book) {
+            state.book = book
+        },
         updateKitob(state, kitob) {
             state.kitob = kitob
         }
@@ -55,6 +75,10 @@ export default {
         books: {
             models: [],
             totalItems: 0
+        },
+        book: {
+            name: '',
+            text: '',
         },
         kitob: {
             name: '',
@@ -69,6 +93,9 @@ export default {
        getBooks(state) {
            return state.books.models
        },
+        getBook(state) {
+            return state.book
+        },
         getKitob(state) {
             return state.kitob
         }
