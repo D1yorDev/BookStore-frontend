@@ -21,22 +21,43 @@ export default {
                         reject()
                     })
             })
+        },
+        fetchCreateKategory(context, data) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .post('http://localhost:8888/api/categories', data)
+                    .then((response) => {
+                        context.commit('updateCreateCategories',response.data)
+                        resolve()
+                    })
+                    .catch(() => {
+                        console.log('Failed,catch() is worked')
+                        reject()
+                    })
+            })
         }
     },
     mutations: {
         updateCategories(state, categories){
             state.categories =categories
+        },
+        updateCreateCategories(state, createkategories){
+            state.createCategories = createkategories
         }
     },
     state: {
         categories: {
             models: [],
             totalItems: 0
-        }
+        },
+        createCategories: ''
     },
     getters: {
         getCategories(state) {
             return state.categories.models
+        },
+        getCreateCategories(state) {
+            return state.createCategories
         }
     }
 }

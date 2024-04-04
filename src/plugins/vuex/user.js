@@ -16,6 +16,20 @@ export default {
                             reject()
                         })
                 })
+            },
+            fetchUser(context, data) {
+                return new Promise((resolve, reject) => {
+                    axios
+                        .post('http://localhost:8888/api/users', data)
+                        .then((response) => {
+                            context.commit('updateUser',response.data)
+                            resolve()
+                        })
+                        .catch(() => {
+                            console.log('Failed,catch() is worked')
+                            reject()
+                        })
+                })
             }
         },
     mutations:
@@ -25,15 +39,22 @@ export default {
                 localStorage.setItem('access_token', token['accessToken'])
                 localStorage.setItem('refresh_token', token['refreshToken'])
             },
+            updateUser(state, user) {
+                state.user = user
+            }
         },
     state:
         {
-            token: localStorage.getItem('access_token')
+            token: localStorage.getItem('access_token'),
+            user: ''
         },
     getters:
         {
         getToken(state) {
             return state.token
-        }
+        },
+            getUser(state) {
+                return state.user
+            }
     }
 }

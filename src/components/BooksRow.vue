@@ -30,7 +30,8 @@ export default {
         v-bind:key="book.id"
         class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
       <div class="card">
-        <img src="../img/sherlock.jpg" class="card-img-top" alt="sherlock-holmes-picture">
+        <img v-if="!book.picture" src="../img/sherlock.jpg" class="card-img-top" alt="sherlock-holmes-picture">
+        <img v-else :src="'http://localhost:8888' + book.picture.contentUrl" class="card-img-top" alt="sherlock-holmes-picture">
         <div class="card-body">
           <h5 class="card-title">{{book.name}}</h5>
           <p class="card-text">{{book.description}}</p>

@@ -26,21 +26,51 @@ export default {
                         reject()
                     })
             })
+        },
+        pushKitob(context,data){
+            return new Promise((resolve, reject) => {
+                axios
+                    .post('http://localhost:8888/api/books', data)
+                    .then((response) => {
+                        console.log('Kitob yaratildi')
+                        context.commit('updateKitob',response.data.kitob)
+                        resolve()
+                    })
+                    .catch(() => {
+                        console.log('Xatolik Kitob yaratilmadi')
+                        reject()
+                    })
+            })
         }
+
     }, mutations: {
        updateBooks(state, books) {
            state.books = books
-       }
+       },
+        updateKitob(state, kitob) {
+            state.kitob = kitob
+        }
     },
     state: {
         books: {
             models: [],
             totalItems: 0
+        },
+        kitob: {
+            name: '',
+            description: '',
+            text: '',
+            category: '',
+
         }
+
     },
     getters: {
        getBooks(state) {
            return state.books.models
-       }
+       },
+        getKitob(state) {
+            return state.kitob
+        }
     }
 }
