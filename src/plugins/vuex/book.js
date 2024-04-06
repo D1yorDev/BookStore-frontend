@@ -5,7 +5,7 @@ export default {
         fetchBooks(context, categoryId = null) {
             let categoryUrl = ''
 
-            if (categoryId !== null){
+            if (categoryId !== null) {
                 categoryUrl = '?category=' + categoryId
             }
             return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ export default {
                     .then((response) => {
                         console.log('success, Books is successfully fetched')
 
-                        let books ={
+                        let books = {
                             models: response.data['hydra:member'],
                             totalItems: response.data['hydra:totalItems'],
                         }
@@ -44,13 +44,13 @@ export default {
             })
         },
 
-        pushKitob(context,data){
+        pushKitob(context, data) {
             return new Promise((resolve, reject) => {
                 axios
                     .post('http://localhost:8888/api/books', data)
                     .then((response) => {
                         console.log('Kitob yaratildi')
-                        context.commit('updateKitob',response.data.kitob)
+                        context.commit('updateKitob', response.data.kitob)
                         resolve()
                     })
                     .catch(() => {
@@ -58,12 +58,12 @@ export default {
                         reject()
                     })
             })
-        }
+        },
 
     }, mutations: {
-       updateBooks(state, books) {
-           state.books = books
-       },
+        updateBooks(state, books) {
+            state.books = books
+        },
         updateBook(state, book) {
             state.book = book
         },
@@ -90,9 +90,9 @@ export default {
 
     },
     getters: {
-       getBooks(state) {
-           return state.books.models
-       },
+        getBooks(state) {
+            return state.books.models
+        },
         getBook(state) {
             return state.book
         },

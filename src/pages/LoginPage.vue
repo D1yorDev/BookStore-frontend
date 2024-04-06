@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <form class="col-6" @submit.prevent="auth">
+  <form class="col-6" @submit.prevent="auth" style="margin-left: 300px">
     <div class="mb-3">
       <label class="col-sm-2 col-form-label" for="inputEmail3">Email</label>
       <div class="col-sm-10">
@@ -48,6 +48,8 @@ export default {
   </form>
 </template>
 
-<style scoped>
-
+<style>
+.inputEmail3 {
+	margin-left: 420px;
+}
 </style>
